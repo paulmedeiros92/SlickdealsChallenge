@@ -100,7 +100,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <ScoreBoard stats={this.state.stats} totalCells={ROWS * COLUMNS}></ScoreBoard>
-        <WinnerModalComponent show={this.state.modalShow} setShow={this.setShow} stats={this.state.stats}/>
+        <WinnerModalComponent show={this.state.modalShow} setShow={this.setShow} stats={this.state.stats} totalCells={ROWS * COLUMNS}/>
         <div className="grid" style={this.buildGridStyle(COLUMNS, ROWS)}>
           {this.buildCells(COLUMNS, ROWS, this.state.cells)}
         </div>

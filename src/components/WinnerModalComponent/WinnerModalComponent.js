@@ -5,11 +5,11 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { COLORS } from '../../classes/Cell';
 
-const WinnerModalComponent = ({show, setShow, stats}) => {
+const WinnerModalComponent = ({show, setShow, stats, totalCells}) => {
   let displayString = "";
   if (stats !== null) {
-    const user = stats.get(COLORS.green);
-    const cpu = stats.get(COLORS.purple);
+    const user = (100 * (stats.get(COLORS.green)/totalCells)).toFixed(0);
+    const cpu = (100 * (stats.get(COLORS.purple)/totalCells)).toFixed(0);
     if (user === cpu) {
       displayString = "It's a tie!"
     } else {
@@ -34,6 +34,7 @@ WinnerModalComponent.propTypes = {
   show: PropTypes.bool.isRequired,
   setShow: PropTypes.func.isRequired,
   stats: PropTypes.instanceOf(Map).isRequired,
+  totalCells: PropTypes.number.isRequired,
 };
 
 WinnerModalComponent.defaultProps = {};
