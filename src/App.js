@@ -7,8 +7,8 @@ import { selectAllAdjacent } from './game-engine/AdjacentSelect';
 import { randomSelect } from './game-engine/RandomSelect';
 import { calculate } from './statistics';
 
-const ROWS = 10;
-const COLUMNS = 10;
+const ROWS = 30;
+const COLUMNS = 30;
 
 class App extends React.Component {
 
@@ -89,7 +89,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <ScoreBoard stats={this.state.stats}></ScoreBoard>
+        <ScoreBoard stats={this.state.stats} totalCells={ROWS * COLUMNS}></ScoreBoard>
         <div className="grid" style={this.buildGridStyle(COLUMNS, ROWS)}>
           {this.buildCells(COLUMNS, ROWS, this.state.cells)}
         </div>
