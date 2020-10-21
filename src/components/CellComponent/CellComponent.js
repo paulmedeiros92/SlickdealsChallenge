@@ -12,7 +12,12 @@ const CellComponent = ({row, column, color, userSelect}) => {
   );
 }
 
-CellComponent.propTypes = {};
+CellComponent.propTypes = {
+  row: PropTypes.number.isRequired,
+  column: PropTypes.number.isRequired,
+  color: PropTypes.instanceOf(COLORS),
+  userSelect: PropTypes.func.isRequired,
+};
 
 CellComponent.defaultProps = {};
 

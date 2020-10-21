@@ -7,7 +7,7 @@ function createLegendIcons(stats, totalCells) {
   return Object.values(COLORS).map(color => {
     let displayNumber = stats === null ? 0 : stats.get(color);
     return (
-      <div className="icon-box">
+      <div className="icon-box" key={color}>
         <div className="number">{(100 * (displayNumber/totalCells)).toFixed(0)}%</div>
         <div className="icon cell" style={{backgroundColor: color}}></div>
       </div>
@@ -26,7 +26,10 @@ const Scoreboard = ({stats, totalCells}) => (
   </div>
 );
 
-Scoreboard.propTypes = {};
+Scoreboard.propTypes = {
+  stats: PropTypes.instanceOf(Map).isRequired,
+  totalCells: PropTypes.arrayOf(PropTypes.array).isRequired,
+};
 
 Scoreboard.defaultProps = {};
 

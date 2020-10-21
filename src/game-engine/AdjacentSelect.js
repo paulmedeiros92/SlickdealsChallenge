@@ -24,12 +24,12 @@ function neighborCheckup(selectedCell) {
   }
   neighbors.forEach(cell => {
     Object.values(DIRECTIONS).forEach(direction => {
-      checkForGrey(cell, cell, direction, true);
+      checkForGrey(cell, direction, true);
     });
   });
 }
 
-function checkForGrey(start, selectedCell, direction, isForward) {
+function checkForGrey(selectedCell, direction, isForward) {
   if (hasAdjacentColor(selectedCell, COLORS.purple, direction) && hasAdjacentColor(selectedCell, COLORS.green, direction)) {
       selectedCell.color = COLORS.grey;
   }
@@ -37,17 +37,16 @@ function checkForGrey(start, selectedCell, direction, isForward) {
     if (!isForward){
       return;
     }
-    checkForGrey(start, selectedCell[OPPOSITEDIRECTIONS[direction]], OPPOSITEDIRECTIONS[direction], false);
+    checkForGrey(selectedCell[OPPOSITEDIRECTIONS[direction]], OPPOSITEDIRECTIONS[direction], false);
     return;
   } else {
-    checkForGrey(start, selectedCell[direction], direction, isForward);
+    checkForGrey(selectedCell[direction], direction, isForward);
   }
 }
 
-function selectAdjacentInDirection(selectedCell, direction, color, count) {
+function selectAdjacentInDirection(selectedCell, direction, color) {
   if (selectedCell.color === COLORS.white) {
     selectedCell.color = color;
-    count++;
   }
   if(selectedCell[direction] === null) {
     return;
@@ -55,15 +54,14 @@ function selectAdjacentInDirection(selectedCell, direction, color, count) {
   selectAdjacentInDirection(selectedCell[direction], direction, color);
 }
 
-function selectAllAdjacent(selectedCell, color, count) {
+function selectAllAdjacent(selectedCell, color) {
   Object.values(DIRECTIONS).forEach(direction => {
-    count = selectAdjacentInDirection(selectedCell, direction, color, count);
+    selectAdjacentInDirection(selectedCell, direction, color);
   });
   Object.values(DIRECTIONS).forEach(direction => {
-    checkForGrey(selectedCell, selectedCell, direction, true);
+    checkForGrey(selectedCell, direction, true);
   });
   neighborCheckup(selectedCell);
-  return count;
 }
 
-module.exports = {selectAllAdjacent};
+module.exports = {selectAllAdjacent, selectAdjacentInDirection, checkForGrey, neighborCheckup, hasAdjacentColor};

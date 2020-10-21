@@ -1,8 +1,12 @@
 import React from 'react';
 import './App.scss';
-import {Cell, COLORS} from './classes/Cell';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import CellComponent from './components/CellComponent/CellComponent';
 import ScoreBoard from './components/Scoreboard/Scoreboard';
+import WinnerModalComponent from './components/WinnerModalComponent/WinnerModalComponent';
+
+import {Cell, COLORS} from './classes/Cell';
 import { selectAllAdjacent } from './game-engine/AdjacentSelect';
 import { randomSelect } from './game-engine/RandomSelect';
 import { calculate } from './statistics';
@@ -29,11 +33,13 @@ class App extends React.Component {
       stats: null,
       start: false,
       color: COLORS.purple,  // purple starts once game commences
+      modalShow: false,
     }
 
     this.buildGridStyle = App.buildGridStyle.bind(this);
     this.userSelect = this.userSelect.bind(this);
     this.buildCells = this.buildCells.bind(this);
+    this.setShow = this.setShow.bind(this);
   }
 
   componentDidMount() {
@@ -52,13 +58,17 @@ class App extends React.Component {
         //cpu first
         const cpuCoordinates = randomSelect(ROWS, COLUMNS, this.state.cells);
         this.userSelect(cpuCoordinates.row, cpuCoordinates.col, this.state.color);
-      }, 250);
+      }, 500);
     }
     if (this.state.start && this.state.stats !== null && this.state.stats.get(COLORS.white) === 0) {
       clearInterval(this.intervalId);
       this.setState({start: false});
-      // TODO: game over
+      this.setShow(true);
     }
+  }
+
+  setShow(modalShow) {
+    this.setState({modalShow});
   }
 
   userSelect(row, col, color) {
@@ -90,6 +100,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <ScoreBoard stats={this.state.stats} totalCells={ROWS * COLUMNS}></ScoreBoard>
+        <WinnerModalComponent show={this.state.modalShow} setShow={this.setShow} stats={this.state.stats}/>
         <div className="grid" style={this.buildGridStyle(COLUMNS, ROWS)}>
           {this.buildCells(COLUMNS, ROWS, this.state.cells)}
         </div>
