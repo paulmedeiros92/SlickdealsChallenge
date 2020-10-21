@@ -1,0 +1,52 @@
+@import '../../global';
+
+.Scoreboard {
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: $header-background;
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: $font-primary, 'Impact';
+    color: $text-primary;
+    font-size: 3rem;
+    
+    .text {
+      margin-left: .5rem;
+    }
+  }
+
+  .logo {
+    height: 3rem;
+  }
+
+  .legend {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .icon-box {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+  }
+
+  .number {
+    font-family: $font-primary, 'Impact';
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $text-primary;
+    margin-right: .5rem;
+  }
+
+  .icon {
+    height: 2rem;
+    width: 2rem;
+    margin: auto;
+  }
+}

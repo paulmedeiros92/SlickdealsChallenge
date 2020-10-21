@@ -1,0 +1,19 @@
+.cell {
+  border-color: #c7c7c7;
+  border-style: solid;
+  border-width: 1px 1px 3px 1px;
+  border-radius: 4px;
+}
+
+// FONT
+$font-primary: 'open-sans';
+
+// COLORS
+$text-primary: #d0d6da;
+$page-background: #e4e4e4;
+$header-background: #31393F;
+
+@font-face {
+  font-family: 'open-sans';
+  src: url('./fonts/OpenSans-Semibold.ttf');
+}
